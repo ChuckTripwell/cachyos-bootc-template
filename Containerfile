@@ -122,8 +122,7 @@ RUN systemctl enable polkit.service \
     NetworkManager.service \
     firewalld.service \
     flatpak-preinstall.service \
-    os-group-fix.service \
-    uupd.timer
+    os-group-fix.service
 
 # Activate NTSync
 RUN echo -e 'ntsync' > /etc/modules-load.d/ntsync.conf
