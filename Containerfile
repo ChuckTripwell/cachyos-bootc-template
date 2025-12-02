@@ -1,3 +1,8 @@
+####                        this is just a template                            ###
+###   please go down to the "Changes go here" section to add your stuff!       ###
+### 
+###
+
 FROM docker.io/cachyos/cachyos-v3:latest AS output
 
 ENV DRACUT_NO_XATTR=1
@@ -135,8 +140,8 @@ net.ipv4.tcp_congestion_control=bbr' > /etc/sysctl.d/99-bbr3.conf
 # adding more than one will break the build.
 #
 # note: only cachyos-based kernels are tested, but you can pretty much use any kernel you want.
-# adding kernel headers is also recommended. complete example:
-
+# adding kernel headers is also recommended.
+#
 RUN pacman -Sy --noconfirm linux-cachyos linux-cachyos-headers
 
 # install packages here! :)
@@ -144,6 +149,7 @@ RUN pacman -Sy --noconfirm linux-cachyos linux-cachyos-headers
 # Archlinux default repo
 # CachyOS package repo
 # Chaotic-aur
+#
 # I added micro for you. go nuts:
 #
 RUN pacman -S --noconfirm micro
@@ -153,8 +159,13 @@ RUN pacman -S --noconfirm micro
 RUN mkdir -p /etc/plymouth && \
       echo -e '[Daemon]\nTheme=spinner' | tee /etc/plymouth/plymouthd.conf && \
       wget --tries=5 -O /usr/share/plymouth/themes/spinner/watermark.png \
-https://raw.githubusercontent.com/ChuckTripwell/cachyos-bootc-template/refs/heads/main/Text_Logo.png # this URL above leads to the logo shown on boot. you can use mine, or upload yours.
+https://raw.githubusercontent.com/ChuckTripwell/cachyos-bootc-template/refs/heads/main/Text_Logo.png # this URL above leads to the logo shown on boot. you can use ours, or upload yours.
 
+
+## enable your services
+# example:
+#
+systemctl enable docker
 
 ########################################################################################################################################
 # end of changes
