@@ -12,6 +12,12 @@ RUN curl https://raw.githubusercontent.com/CachyOS/CachyOS-PKGBUILDS/master/cach
 RUN pacman -Syy --needed --overwrite "*" --noconfirm cachyos-keyring cachyos-mirrorlist cachyos-v3-mirrorlist cachyos-v4-mirrorlist cachyos-hooks archlinux-keyring pacman-mirrorlist
 RUN pacman -Syy --noconfirm
 
+# install basic stuff
+RUN pacman -S --noconfirm base dracut linux-firmware ostree systemd btrfs-progs e2fsprogs xfsprogs binutils dosfstools skopeo dbus dbus-glib glib2 shadow udev wget
+RUN pacman -S --noconfirm librsvg libglvnd qt6-multimedia-ffmpeg plymouth acpid ddcutil dmidecode mesa-utils ntfs-3g vulkan-tools wayland-utils playerctl curl
+RUN pacman -S --noconfirm distrobox podman shim networkmanager firewalld flatpak gamescope scx-scheds scx-manager sudo bash bash-completion fastfetch unzip ptyxis
+
+
 RUN pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
 
 RUN pacman-key --init && pacman-key --lsign-key 3056513887B78AEB
@@ -24,10 +30,7 @@ RUN echo -e '[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist' >> /etc/
 
 RUN pacman -Sy --noconfirm chaotic-aur/bootc
 
-# install basic stuff
-RUN pacman -S --noconfirm base dracut linux-firmware ostree systemd btrfs-progs e2fsprogs xfsprogs binutils dosfstools skopeo dbus dbus-glib glib2 shadow udev
-RUN pacman -S --noconfirm librsvg libglvnd qt6-multimedia-ffmpeg plymouth acpid ddcutil dmidecode mesa-utils ntfs-3g vulkan-tools wayland-utils playerctl curl
-RUN pacman -S --noconfirm distrobox podman shim networkmanager firewalld flatpak gamescope scx-scheds scx-manager sudo bash bash-completion fastfetch unzip ptyxis
+
 
 
 # add post-transaction flatpsks
