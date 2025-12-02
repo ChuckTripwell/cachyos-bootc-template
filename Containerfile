@@ -166,7 +166,7 @@ https://raw.githubusercontent.com/ChuckTripwell/cachyos-bootc-template/refs/head
 ## enable your services
 # example:
 #
-systemctl enable podman
+RUN systemctl enable podman
 
 # add flatpaks
 # example: Bazaar (very useful, do not remove!)
