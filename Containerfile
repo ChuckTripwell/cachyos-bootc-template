@@ -114,8 +114,15 @@ WantedBy=default.target multi-user.target' > /usr/lib/systemd/system/os-group-fi
 
 RUN echo -e "enable os-group-fix.service" > /usr/lib/systemd/system-preset/01-os-group-fix.preset
 
-# fix sudo
-RUN echo -e '%wheel ALL=(ALL:ALL) ALL'
+# All kindsa Sudo changes for ease and flavor
+RUN echo -e '%wheel ALL=(ALL:ALL) ALL\n\
+\n\
+Defaults insults\n\
+Defaults pwfeedback\n\
+Defaults secure_path="/usr/local/bin:/usr/bin:/bin:/home/linuxbrew/.linuxbrew/bin"\n\
+Defaults env_keep += "EDITOR VISUAL PATH"\n\
+Defaults timestamp_timeout=0' > /etc/sudoers.d/sudo-quiver && \
+    chmod 440 /etc/sudoers.d/sudo-quiver
 
 
 # System services (Machine Boot level)
